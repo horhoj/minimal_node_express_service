@@ -1,20 +1,16 @@
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+import express from 'express';
+import bodyParser from 'body-parser';
+import todoController from './todoController';
 
-// 1,2,3,
-// 1,3,4
-// 2,3,4
+const app = express();
 
-const fn = () => {
-  let m = 0;
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = i + 1; j < arr.length; j++) {
-      for (let k = j + 1; k < arr.length; k++) {
-        m++;
+app.use(bodyParser.json());
 
-        console.log(arr[i], arr[j], arr[k], arr[i] + arr[j] + arr[k]);
-      }
-    }
-  }
-};
+// Роуты
+app.use('/todos', todoController);
 
-fn();
+// Запуск сервера
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});

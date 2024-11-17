@@ -4,18 +4,25 @@
   "private": true,
   "module": "commonjs",
   "dependencies": {
-    "typescript": "^5.3.2"
+    "@prisma/client": "^5.22.0",
+    "@types/express": "^5.0.0",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
+    "prisma": "^5.22.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
   },
   "scripts": {
-    "dev": "tsx --watch ./src/index.ts",
-    "start": "tsx ./src/index.ts",
+    "dev": "npx prisma generate && npm run migrate && tsx --watch ./src/index.ts",
+    "prod": "npm run migrate && tsx ./src/index.ts",
+    "migrate": "npx prisma migrate dev --name init",
     "lint-check": "eslint ./src --ext .js,.ts,.tsx,.jsx",
     "lint-fix": "eslint ./src --ext .js,.ts,.tsx,.jsx  --fix",
-    "test": "jest --watch"
+    "test": "jest --watch-all"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
-    "@types/node": "^20.10.2",
+    "@types/node": "^20.17.6",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "eslint": "^8.55.0",
